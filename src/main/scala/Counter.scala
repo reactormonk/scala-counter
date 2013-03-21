@@ -20,7 +20,8 @@ class Counter[A, B](counter: Map[A, B])(implicit num:Numeric[B]) {
   }
   override def hashCode = counter.hashCode
   override def toString: String = counter.toString.replaceFirst("Map", "Counter") // cheap but effective
-  def toCounter[Num: Numeric]: Counter[A, Num] = Counter[A, Num](counter)
+  def toCounter[Num: Numeric](implicit ev: B => Num): Counter[A, Num] = Counter(counter.mapValues(ev))
+
 }
 
 object Counter {

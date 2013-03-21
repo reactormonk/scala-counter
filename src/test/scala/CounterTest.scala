@@ -52,13 +52,13 @@ class CounterSpec extends FunSpec with ShouldMatchers {
   it("should count the element of an Iterable when constructed that way") {
     Counter(Seq("bar", "foo", "bar")) should equal(simple)
   }
-  
+
   val floaty = Counter(Map("foo" -> 1.5, "bar" -> 2.5))
 
   it("should add to a floaty counter") {
     (floaty + "foo").toMap should equal(Map("foo" -> 2.5, "bar" -> 2.5))
   }
   it("should combine a floaty and an int counter") {
-    (floaty ++ simple.toCounter[Float]).toMap should equal(Map("foo" -> 2.5, "bar" -> 4.5))
+    (floaty ++ simple.toCounter[Double]).toMap should equal(Map("foo" -> 2.5, "bar" -> 4.5))
   }
 }
