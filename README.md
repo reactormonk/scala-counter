@@ -1,4 +1,4 @@
-scala-couter
+scala-counter
 ============
 
 A Counter class for Scala
