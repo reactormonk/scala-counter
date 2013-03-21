@@ -56,6 +56,9 @@ class CounterSpec extends FunSpec with ShouldMatchers {
   val floaty = Counter(Map("foo" -> 1.5, "bar" -> 2.5))
 
   it("should add to a floaty counter") {
-    (simple + "foo").toMap should equal(Map("foo" -> 2.5, "bar" -> 2.5))
+    (floaty + "foo").toMap should equal(Map("foo" -> 2.5, "bar" -> 2.5))
+  }
+  it("should combine a floaty and an int counter") {
+    (floaty ++ simple.toCounter[Float]).toMap should equal(Map("foo" -> 2.5, "bar" -> 4.5))
   }
 }
