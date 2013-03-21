@@ -4,6 +4,7 @@ import Numeric.Implicits._
 class Counter[A, B](counter: Map[A, B])(implicit num:Numeric[B]) {
   def +(key: A): Counter[A, B] = this.change(key, num.fromInt(1))
   def -(key: A): Counter[A, B] = this.change(key, num.fromInt(-1))
+  def *(by: B): Counter[A, B] = Counter(counter.mapValues(value => value * by))
   def change(key: A, by: B): Counter[A, B] = Counter((counter + (key -> {by.+(apply(key)):B})))
   def ++(other: Counter[A, B]): Counter[A, B] = other.iterator.foldLeft(this)({case (counter, (key, count)) => counter.change(key, count)})
   def get(key: A): Option[B] = counter.get(key)

@@ -27,6 +27,9 @@ class CounterSpec extends FunSpec with ShouldMatchers {
   it("should add together two counters") {
     (simple ++ Counter(Map("bar" -> -1))).toMap should equal(Map("foo" -> 1, "bar" -> 1))
   }
+  it("should multiply") {
+    (simple * 2).toMap should equal(Map("foo" -> 2, "bar" -> 4))
+  }
   it("should return an Option containing the element") {
     simple.get("foo") should equal (Some(1))
   }
@@ -60,5 +63,9 @@ class CounterSpec extends FunSpec with ShouldMatchers {
   }
   it("should combine a floaty and an int counter") {
     (floaty ++ simple.toCounter[Double]).toMap should equal(Map("foo" -> 2.5, "bar" -> 4.5))
+  }
+  it("should multiply floaty") {
+    // albeit you should not == floats
+    (floaty * 2).toMap should equal(Map("foo" -> 3.0, "bar" -> 5.0))
   }
 }
