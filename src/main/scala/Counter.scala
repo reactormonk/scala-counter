@@ -1,4 +1,4 @@
-package reactormonk
+package org.reactormonk
 import Numeric.Implicits._
 
 class Counter[A, B](counter: Map[A, B])(implicit num:Numeric[B]) {

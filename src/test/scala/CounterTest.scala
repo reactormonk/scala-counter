@@ -1,4 +1,4 @@
-import reactormonk.Counter
+import org.reactormonk.Counter
 import org.scalatest.FunSpec
 import org.scalatest.matchers.ShouldMatchers
 
