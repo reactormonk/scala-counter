@@ -23,6 +23,7 @@ class Counter[A, B:Numeric](counter: Map[A, B]) {
   override def toString: String = counter.toString.replaceFirst("Map", "Counter") // cheap but effective
   def mapValues[Num: Numeric](fun: B => Num)(implicit num:Numeric[Num]): Counter[A, Num] = toCounter(num, fun)
   def toCounter[Num: Numeric](implicit ev: B => Num): Counter[A, Num] = Counter(counter.mapValues(ev))
+  def max: A = counter.maxBy(_._2)._1
 }
 
 object Counter {
