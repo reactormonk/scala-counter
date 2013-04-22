@@ -1,19 +1,19 @@
 package org.reactormonk
-import Numeric.Implicits._
 
-class Counter[A, B](counter: Map[A, B]) {
+class Counter[A, B:Numeric](counter: Map[A, B]) {
+  import Numeric.Implicits._
   def +(key: A)(implicit num:Numeric[B]): Counter[A, B] = this.change(key, num.fromInt(1))
   def -(key: A)(implicit num:Numeric[B]): Counter[A, B] = this.change(key, num.fromInt(-1))
-  def *(by: B)(implicit num:Numeric[B]): Counter[A, B] = Counter(counter.mapValues(value => value * by))
-  def change(key: A, by: B)(implicit num:Numeric[B]): Counter[A, B] = Counter((counter + (key -> {by.+(apply(key)):B})))
-  def ++(other: Counter[A, B])(implicit num:Numeric[B]): Counter[A, B] = other.iterator.foldLeft(this)({case (counter, (key, count)) => counter.change(key, count)})
+  def *(by: B): Counter[A, B] = Counter(counter.mapValues(value => value * by))
+  def change(key: A, by: B): Counter[A, B] = Counter((counter + (key -> {by.+(apply(key)):B})))
+  def ++(other: Counter[A, B]): Counter[A, B] = other.iterator.foldLeft(this)({case (counter, (key, count)) => counter.change(key, count)})
   def get(key: A): Option[B] = counter.get(key)
   def apply(key: A)(implicit num:Numeric[B]): B = counter.getOrElse(key, num.fromInt(0))
   def toMap(): Map[A, B] = counter
   def iterator(): Iterator[Tuple2[A, B]] = counter.iterator
   def toList(): List[Tuple2[A, B]] = counter.toList
   def toSeq(): Seq[Tuple2[A, B]] = counter.toSeq
-  def empty()(implicit num:Numeric[B]): Counter[A, B] = Counter[A, B]()
+  def empty(): Counter[A, B] = Counter[A, B]()
   def size: Int = counter.size
   override def equals(other: Any): Boolean = other match {
     case (other: Counter[A, B]) => counter.toMap.equals(other.toMap)
@@ -21,6 +21,7 @@ class Counter[A, B](counter: Map[A, B]) {
   }
   override def hashCode = counter.hashCode
   override def toString: String = counter.toString.replaceFirst("Map", "Counter") // cheap but effective
+  def mapValues[Num: Numeric](fun: B => Num)(implicit num:Numeric[Num]): Counter[A, Num] = toCounter(num, fun)
   def toCounter[Num: Numeric](implicit ev: B => Num): Counter[A, Num] = Counter(counter.mapValues(ev))
 }
 
