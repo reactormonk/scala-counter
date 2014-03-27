@@ -4,7 +4,7 @@ organization := "org.reactormonk"
 
 version := "1.3.0"
 
-scalaVersion := "2.10.1"
+scalaVersion := "2.10.4"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
@@ -25,7 +25,7 @@ publishTo <<= version { (v: String) =>
 publishArtifact in Test := false
 
 pomExtra := (
-  <url>http://github.com/Tass/scala-counter</url>
+  <url>http://github.com/reactormonk/scala-counter</url>
   <licenses>
     <license>
       <name>Beerware</name>
@@ -33,8 +33,8 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:Tass/scala-counter.git</url>
-    <connection>scm:git:git@github.com:Tass/scala-counter.git</connection>
+    <url>git@github.com:reactormonk/scala-counter.git</url>
+    <connection>scm:git:git@github.com:reactormonk/scala-counter.git</connection>
   </scm>
   <developers>
     <developer>
