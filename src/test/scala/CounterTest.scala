@@ -74,4 +74,8 @@ class CounterSpec extends FunSpec with ShouldMatchers {
     // albeit you should not == floats
     (floaty * 2).toMap should equal(Map("foo" -> 3.0, "bar" -> 5.0))
   }
+  it("should sum values") {
+    simple.sum should equal(3)
+    floaty.sum should equal(4.0)
+  }
 }
