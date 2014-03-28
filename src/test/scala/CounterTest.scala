@@ -78,4 +78,7 @@ class CounterSpec extends FunSpec with ShouldMatchers {
     simple.sum should equal(3)
     floaty.sum should equal(4.0)
   }
+  it("should normalize") {
+    Counter(Map("foo" -> 1, "bar" -> 3)).normalize should equal(Counter(Map("foo" -> 0.25, "bar" -> 0.75)))
+  }
 }

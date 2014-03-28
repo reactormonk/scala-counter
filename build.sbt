@@ -2,7 +2,7 @@ name := "Counter"
 
 organization := "org.reactormonk"
 
-version := "1.3.0"
+version := "1.3.2"
 
 scalaVersion := "2.10.4"
 

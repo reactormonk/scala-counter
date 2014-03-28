@@ -25,10 +25,14 @@ class Counter[A, B:Numeric](counter: Map[A, B]) {
   def toCounter[Num: Numeric](implicit ev: B => Num): Counter[A, Num] = Counter(counter.mapValues(ev))
   def max: A = counter.maxBy(_._2)._1
   def sum: B = counter.values.sum
+  // Normalizes the counter such that the sum of all values is one.
+  def normalize(): Counter[A, Double] = mapValues(value => value.toDouble / sum.toDouble)
+  def keys(): Iterable[A] = counter.keys
 }
 
 object Counter {
   def apply[A, B: Numeric](): Counter[A, B] = apply(Map[A, B]())
   def apply[A, B: Numeric](counter: Map[A, B]): Counter[A, B] = { new Counter[A, B](counter) }
-  def apply[A](count: Iterable[A]): Counter[A, Int] = count.foldLeft(apply[A, Int]())({case (counter, element) => counter + element})
+  def apply[A](count: Iterable[A]): Counter[A, Int] = apply(count.toIterator)
+  def apply[A](count: Iterator[A]): Counter[A, Int] = count.foldLeft(apply[A, Int]())({case (counter, element) => counter + element})
 }
