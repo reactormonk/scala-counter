@@ -61,6 +61,9 @@ class CounterSpec extends FunSpec with ShouldMatchers {
   it ("should return the element with the highest count") {
     Counter(Seq("bar", "foo", "bar")).max should equal("bar")
   }
+  it ("should return the element with the lowest count") {
+    Counter(Seq("bar", "foo", "bar")).min should equal("foo")
+  }
 
   val floaty = Counter(Map("foo" -> 1.5, "bar" -> 2.5))
 

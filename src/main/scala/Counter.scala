@@ -24,6 +24,7 @@ class Counter[A, B:Numeric](counter: Map[A, B]) {
   def mapValues[Num: Numeric](fun: B => Num)(implicit num:Numeric[Num]): Counter[A, Num] = toCounter(num, fun)
   def toCounter[Num: Numeric](implicit ev: B => Num): Counter[A, Num] = Counter(counter.mapValues(ev))
   def max: A = counter.maxBy(_._2)._1
+  def min: A = counter.minBy(_._2)._1
   def sum: B = counter.values.sum
   // Normalizes the counter such that the sum of all values is one.
   def normalize(): Counter[A, Double] = mapValues(value => value.toDouble / sum.toDouble)
