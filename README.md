@@ -7,11 +7,11 @@ A Counter class for Scala
 
 For sbt, use:
 
-    libraryDependencies += "org.rogach" %% "scallop" % "0.8.1"
+    libraryDependencies += "org.reactormonk" %% "counter" % "1.3.3"
 
 or when you prefer the seq approach:
 
-    "org.rogach" %% "scallop" % "0.8.1",
+    "org.reactormonk" %% "counter" % "1.3.3",
 
 # Use
 
