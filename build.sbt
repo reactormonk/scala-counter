@@ -2,11 +2,11 @@ name := "Counter"
 
 organization := "org.reactormonk"
 
-version := "1.3.2"
+version := "1.3.3"
 
-scalaVersion := "2.10.4"
+crossScalaVersions := Seq("2.10.3", "2.11.7")
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.5" % "test"
 
 publishMavenStyle := true
 
